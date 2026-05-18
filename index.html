@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Guia Completa: Devin y Windsurf</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --devin-primary: #6C5CE7;
+    --devin-light: #A29BFE;
+    --devin-bg: #F8F7FF;
+    --wind-primary: #00B894;
+    --wind-light: #55EFC4;
+    --wind-bg: #F0FFF4;
+    --compare-primary: #E17055;
+    --compare-light: #FAB1A0;
+    --compare-bg: #FFF5F0;
+    --text-dark: #2D3436;
+    --text-medium: #636E72;
+    --text-light: #B2BEC3;
+    --bg-white: #FFFFFF;
+    --bg-gray: #F5F6FA;
+    --border: #DFE6E9;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-dark);
+    background: var(--bg-gray);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(135deg, #6C5CE7 0%, #00B894 100%);
+    color: white;
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+  .hero h1 {
+    font-size: 2.8em;
+    font-weight: 800;
+    margin-bottom: 10px;
+    position: relative;
+    letter-spacing: -1px;
+  }
+  .hero .subtitle {
+    font-size: 1.2em;
+    font-weight: 300;
+    opacity: 0.9;
+    position: relative;
+  }
+  .hero .badges {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero .badge {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.9em;
+    font-weight: 500;
+  }
+
+  /* ===== LAYOUT ===== */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== TOC ===== */
+  .toc-section {
+    background: var(--bg-white);
+    margin: -30px auto 40px;
+    max-width: 1100px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 40px;
+    position: relative;
+    z-index: 10;
+  }
+  .toc-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 24px;
+    text-align: center;
+    color: var(--text-dark);
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .toc-card {
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    border-left: 4px solid;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .toc-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+  .toc-card.devin { background: var(--devin-bg); border-color: var(--devin-primary); }
+  .toc-card.windsurf { background: var(--wind-bg); border-color: var(--wind-primary); }
+  .toc-card.compare { background: var(--compare-bg); border-color: var(--compare-primary); }
+  .toc-card .toc-label {
+    font-size: 0.7em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 6px;
+  }
+  .toc-card.devin .toc-label { color: var(--devin-primary); }
+  .toc-card.windsurf .toc-label { color: var(--wind-primary); }
+  .toc-card.compare .toc-label { color: var(--compare-primary); }
+  .toc-card h3 { font-size: 1.05em; margin-bottom: 4px; }
+  .toc-card p { font-size: 0.85em; color: var(--text-medium); }
+
+  /* ===== SECTIONS ===== */
+  .part-header {
+    padding: 40px;
+    border-radius: var(--radius);
+    margin: 50px auto 30px;
+    max-width: 1100px;
+    text-align: center;
+    color: white;
+  }
+  .part-header.devin { background: linear-gradient(135deg, #6C5CE7, #A29BFE); }
+  .part-header.windsurf { background: linear-gradient(135deg, #00B894, #55EFC4); color: #1a1a2e; }
+  .part-header.compare { background: linear-gradient(135deg, #E17055, #FAB1A0); }
+  .part-header .part-icon { font-size: 2.5em; margin-bottom: 10px; }
+  .part-header h2 { font-size: 2em; font-weight: 800; letter-spacing: -0.5px; }
+  .part-header p { font-size: 1.05em; opacity: 0.9; margin-top: 8px; }
+
+  .section {
+    background: var(--bg-white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin: 24px auto;
+    max-width: 1100px;
+    padding: 36px 40px;
+    scroll-margin-top: 20px;
+  }
+  .section h2 {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section h2 .sec-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    flex-shrink: 0;
+  }
+  .section h2 .sec-icon.devin { background: var(--devin-bg); color: var(--devin-primary); }
+  .section h2 .sec-icon.windsurf { background: var(--wind-bg); color: var(--wind-primary); }
+  .section h2 .sec-icon.compare { background: var(--compare-bg); color: var(--compare-primary); }
+  .section .section-desc {
+    color: var(--text-medium);
+    margin-bottom: 24px;
+    font-size: 0.95em;
+  }
+  .section h3 {
+    font-size: 1.15em;
+    font-weight: 600;
+    margin: 28px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--bg-gray);
+  }
+  .section h4 {
+    font-size: 1em;
+    font-weight: 600;
+    margin: 18px 0 8px;
+  }
+
+  /* ===== TABLES ===== */
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 16px 0;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 0.92em;
+  }
+  thead th {
+    background: var(--bg-gray);
+    font-weight: 600;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #FAFBFC; }
+
+  /* ===== CARDS GRID ===== */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .card {
+    background: var(--bg-gray);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: var(--shadow); }
+  .card .card-icon { font-size: 1.6em; margin-bottom: 8px; }
+  .card h4 { font-size: 1em; font-weight: 600; margin-bottom: 6px; }
+  .card p { font-size: 0.88em; color: var(--text-medium); }
+  .card ul { font-size: 0.88em; color: var(--text-medium); padding-left: 18px; margin-top: 4px; }
+  .card ul li { margin-bottom: 3px; }
+
+  /* ===== STAT BOXES ===== */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .stat {
+    text-align: center;
+    padding: 24px 16px;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--devin-bg), #fff);
+    border: 1px solid var(--border);
+  }
+  .stat .stat-value {
+    font-size: 2em;
+    font-weight: 800;
+    color: var(--devin-primary);
+    line-height: 1.1;
+  }
+  .stat .stat-label {
+    font-size: 0.85em;
+    color: var(--text-medium);
+    margin-top: 4px;
+  }
+
+  /* ===== CODE BLOCKS ===== */
+  pre {
+    background: #1E1E2E;
+    color: #CDD6F4;
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    overflow-x: auto;
+    font-family: 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    line-height: 1.6;
+    margin: 12px 0;
+    border: 1px solid #313244;
+  }
+  code {
+    font-family: 'Fira Code', 'Cascadia Code', monospace;
+    background: var(--bg-gray);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--devin-primary);
+  }
+  pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+  }
+
+  /* ===== CALLOUTS ===== */
+  .callout {
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin: 16px 0;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.93em;
+  }
+  .callout .callout-icon { font-size: 1.3em; flex-shrink: 0; margin-top: 1px; }
+  .callout-tip { background: #E8F8F5; border-left: 4px solid var(--wind-primary); }
+  .callout-info { background: #EBF5FB; border-left: 4px solid #3498DB; }
+  .callout-warn { background: #FEF9E7; border-left: 4px solid #F39C12; }
+  .callout-important { background: var(--devin-bg); border-left: 4px solid var(--devin-primary); }
+
+  /* ===== PILLS / TAGS ===== */
+  .pill {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 50px;
+    font-size: 0.78em;
+    font-weight: 600;
+  }
+  .pill-devin { background: var(--devin-bg); color: var(--devin-primary); }
+  .pill-wind { background: var(--wind-bg); color: #00896e; }
+  .pill-new { background: #FFEAA7; color: #6C5A00; }
+
+  /* ===== CHECKLIST ===== */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  .checklist li {
+    padding: 10px 16px;
+    margin-bottom: 6px;
+    background: var(--bg-gray);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.93em;
+  }
+  .checklist li::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ===== FLOW DIAGRAM ===== */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .flow-step {
+    background: var(--bg-white);
+    border: 2px solid var(--devin-light);
+    border-radius: var(--radius-sm);
+    padding: 12px 18px;
+    text-align: center;
+    font-size: 0.85em;
+    font-weight: 500;
+    min-width: 130px;
+  }
+  .flow-arrow {
+    font-size: 1.2em;
+    color: var(--devin-light);
+    padding: 0 6px;
+  }
+
+  /* ===== COMPARISON TABLE ===== */
+  .compare-table {
+    border: 2px solid var(--compare-primary);
+  }
+  .compare-table thead th {
+    background: var(--compare-bg);
+    color: var(--compare-primary);
+  }
+  .compare-table thead th:first-child { background: var(--bg-gray); color: var(--text-dark); }
+
+  /* ===== LINK ===== */
+  a {
+    color: var(--devin-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  a:hover { text-decoration: underline; }
+
+  /* ===== SEPARATOR ===== */
+  hr {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 30px 0;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-medium);
+    font-size: 0.85em;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .footer a { color: var(--devin-primary); }
+
+  /* ===== LISTS ===== */
+  .section ul, .section ol {
+    padding-left: 22px;
+    margin: 8px 0;
+  }
+  .section li { margin-bottom: 5px; }
+
+  /* ===== TWO COLS ===== */
+  .two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 16px 0;
+  }
+  @media (max-width: 700px) {
+    .two-cols { grid-template-columns: 1fr; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2em; }
+    .section { padding: 24px 20px; }
+    .flow { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+
+  /* ===== PROMPT EXAMPLE ===== */
+  .prompt-example {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin: 14px 0;
+    border: 1px solid var(--border);
+  }
+  .prompt-example .prompt-label {
+    padding: 8px 16px;
+    font-size: 0.78em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .prompt-example .prompt-label.good { background: #D4EDDA; color: #155724; }
+  .prompt-example .prompt-label.bad { background: #F8D7DA; color: #721C24; }
+  .prompt-example pre { margin: 0; border-radius: 0; border: none; }
+
+  /* ===== KEYBOARD SHORTCUT ===== */
+  kbd {
+    background: var(--bg-gray);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-family: inherit;
+    font-size: 0.85em;
+    font-weight: 600;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  /* ===== DIAGRAM ASCII ===== */
+  .diagram {
+    background: #F8F9FA;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.82em;
+    line-height: 1.5;
+    overflow-x: auto;
+    white-space: pre;
+    margin: 16px 0;
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    .hero { padding: 30px; }
+    .section { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+    .part-header { break-before: page; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+<!-- ==================== HERO ==================== -->
+<div class="hero">
+<h1>Devin &amp; Windsurf</h1>
+<div class="subtitle">Guia Integral de Herramientas de IA para Desarrollo de Software</div>
+<div class="badges">
+<span class="badge">Casos de Uso</span>
+<span class="badge">Manuales de Usuario</span>
+<span class="badge">Ejemplos Reales</span>
+<span class="badge">Comparativas</span>
+</div>
+</div>
+<!-- ==================== TOC ==================== -->
+<div class="container">
+<div class="toc-section">
+<h2>Indice General</h2>
+<div class="toc-grid">
+<a class="toc-card devin" href="#sec-a">
+<div class="toc-label">Parte I - Devin</div>
+<h3>A. Casos de Uso Destacados</h3>
+<p>9 categorias: modernizacion, calidad, incidentes, automatizacion, features, data, PM, scraping, avanzado</p>
+</a>
+<a class="toc-card devin" href="#sec-b">
+<div class="toc-label">Parte I - Devin</div>
+<h3>B. QA y Testing</h3>
+<p>11 areas: tests automaticos, visual, Devin Review, vulnerabilidades, E2E, debug, Skills, Playbooks, paralelo, MCP</p>
+</a>
+<a class="toc-card devin" href="#sec-c">
+<div class="toc-label">Parte I - Devin</div>
+<h3>C. Ejemplos Reales</h3>
+<p>Nubank (8x ahorro), Java, COBOL, SAS, JS→TS, NoSQL→SQL, sesiones reales con links, metricas de impacto</p>
+</a>
+<a class="toc-card devin" href="#sec-d">
+<div class="toc-label">Parte I - Devin</div>
+<h3>D. Manual de Primeros Usuarios</h3>
+<p>21 secciones: setup, interfaz, Ask vs Agent, prompts, Knowledge, Playbooks, Secrets, Review, integraciones, MCP</p>
+</a>
+<a class="toc-card windsurf" href="#sec-e">
+<div class="toc-label">Parte II - Windsurf</div>
+<h3>E. Casos de Uso Destacados</h3>
+<p>15 secciones: Cascade, Supercomplete, generacion, refactoring, tests, debug, migraciones, frontend, backend</p>
+</a>
+<a class="toc-card windsurf" href="#sec-f">
+<div class="toc-label">Parte II - Windsurf</div>
+<h3>F. Manual de Primeros Usuarios</h3>
+<p>17 secciones: instalacion, interfaz, Cascade, Supercomplete, Chat, Terminal, Flows, modelos, atajos, config</p>
+</a>
+<a class="toc-card compare" href="#sec-g">
+<div class="toc-label">Parte III</div>
+<h3>G. Comparativa y Complementariedad</h3>
+<p>Tabla completa Devin vs Windsurf, cuando usar cada uno, flujo de trabajo combinado recomendado</p>
+</a>
+</div>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- PARTE I - DEVIN                                               -->
+<!-- ============================================================ -->
+<div class="part-header devin">
+<div class="part-icon">🤖</div>
+<h2>PARTE I — DEVIN</h2>
+<p>Ingeniero de Software Autonomo con IA • Desarrollado por Cognition AI</p>
+</div>
+<!-- ===== SECCION A: CASOS DE USO ===== -->
+<div class="section" id="sec-a">
+<h2><span class="sec-icon devin">A</span> Casos de Uso Destacados de Devin</h2>
+<p class="section-desc">Devin es un ingeniero de software autonomo capaz de escribir, ejecutar y probar codigo. A continuacion, los casos de uso organizados por categoria.</p>
+<div class="stats">
+<div class="stat"><div class="stat-value">6-12x</div><div class="stat-label">Ganancia de eficiencia</div></div>
+<div class="stat"><div class="stat-value">90%+</div><div class="stat-label">Cobertura de tests</div></div>
+<div class="stat"><div class="stat-value">~70%</div><div class="stat-label">Vulnerabilidades auto-corregidas</div></div>
+<div class="stat"><div class="stat-value">≤3h</div><div class="stat-label">Regla de complejidad</div></div>
+</div>
+<h3>1. Modernizacion de Codigo</h3>
+<table>
+<thead><tr><th style="width:30%">Caso de Uso</th><th>Descripcion</th></tr></thead>
+<tbody>
+<tr><td><strong>Upgrades de version</strong></td><td>Java 8→17, Python 2→3, PHP 7→8, Angular, React, Spring Boot, .NET</td></tr>
+<tr><td><strong>Migraciones de lenguaje</strong></td><td>JavaScript → TypeScript, SAS → PySpark</td></tr>
+<tr><td><strong>Mainframe</strong></td><td>COBOL/SAS → Python/Java</td></tr>
+<tr><td><strong>Bases de datos</strong></td><td>MongoDB → PostgreSQL, DynamoDB → MySQL</td></tr>
+<tr><td><strong>APIs</strong></td><td>SOAP → REST/GraphQL, logging, rate-limiting</td></tr>
+<tr><td><strong>Reorganizacion</strong></td><td>Monorepo → submodulos, extraccion de librerias</td></tr>
+<tr><td><strong>Migracion paralela</strong></td><td>50+ archivos REST→GraphQL en paquetes independientes simultaneos</td></tr>
+</tbody>
+</table>
+<h3>2. Calidad Continua de Codigo</h3>
+<div class="cards">
+<div class="card"><div class="card-icon">🛡</div><h4>Remediacion de vulnerabilidades</h4><p>SonarQube, Fortify, Veracode — auto-correccion de code smells, bugs y CVEs</p></div>
+<div class="card"><div class="card-icon">🧪</div><h4>Generacion de tests</h4><p>Tests unitarios, integracion y E2E auto-generados</p></div>
+<div class="card"><div class="card-icon">🔍</div><h4>Revision de PRs</h4><p>Auto-Review, Bug Catcher, Auto-Fix antes del merge</p></div>
+<div class="card"><div class="card-icon">🌐</div><h4>i18n</h4><p>Soporte multi-idioma, centralizacion de archivos de idioma</p></div>
+<div class="card"><div class="card-icon">📝</div><h4>Type Safety</h4><p>Tipado estatico y anotaciones de tipos</p></div>
+<div class="card"><div class="card-icon">🗑</div><h4>Limpieza de feature flags</h4><p>Eliminar flags obsoletos y codigo muerto post-release</p></div>
+</div>
+<h3>3. Respuesta a Incidentes</h3>
+<table>
+<thead><tr><th style="width:30%">Caso de Uso</th><th>Descripcion</th></tr></thead>
+<tbody>
+<tr><td><strong>Auto-investigar Datadog</strong></td><td>Conectar PagerDuty/Datadog para investigacion automatica de incidentes</td></tr>
+<tr><td><strong>Auto-triage Sentry</strong></td><td>Webhooks de Sentry → Devin clasifica cada error en produccion</td></tr>
+<tr><td><strong>Postmortems automaticos</strong></td><td>Timeline, root cause y action items auto-generados</td></tr>
+<tr><td><strong>Debug end-to-end</strong></td><td>Bug report + logs Datadog + acceso DB = root cause analysis</td></tr>
+</tbody>
+</table>
+<h3>4. Automatizaciones Recurrentes</h3>
+<table>
+<thead><tr><th style="width:30%">Caso de Uso</th><th>Descripcion</th></tr></thead>
+<tbody>
+<tr><td><strong>Auto-fix CI</strong></td><td>GitHub Action que llama a Devin cuando CI falla en PRs</td></tr>
+<tr><td><strong>Tests E2E nocturnos</strong></td><td>Suite E2E nocturna en staging + creacion automatica de tickets</td></tr>
+<tr><td><strong>Update deps semanal</strong></td><td>Busca paquetes desactualizados, ejecuta tests, abre PRs</td></tr>
+<tr><td><strong>Digest diario Datadog</strong></td><td>Escaneo diario → resumen en Slack</td></tr>
+<tr><td><strong>Changelog semanal</strong></td><td>Compilar PRs mergeados cada viernes</td></tr>
+<tr><td><strong>Fix nocturno Sentry</strong></td><td>Revisar errores nuevos overnight → abrir PRs de correccion</td></tr>
+</tbody>
+</table>
+<h3>5. Desarrollo de Features</h3>
+<div class="cards">
+<div class="card"><div class="card-icon">📑</div><h4>API desde OpenAPI Spec</h4><p>YAML spec → route handlers, validacion y tests</p></div>
+<div class="card"><div class="card-icon">🎨</div><h4>Figma a codigo</h4><p>Componentes pixel-perfect desde mockups de Figma via MCP</p></div>
+<div class="card"><div class="card-icon">📦</div><h4>Dockerizar apps</h4><p>Dockerfile multi-stage + docker-compose.yml verificados</p></div>
+<div class="card"><div class="card-icon">💳</div><h4>Stripe checkout</h4><p>Flujo de pago completo con tests y verificacion en navegador</p></div>
+<div class="card"><div class="card-icon">🛠</div><h4>Herramientas internas</h4><p>Describe → Devin construye, prueba y verifica E2E</p></div>
+<div class="card"><div class="card-icon">📷</div><h4>Regresiones visuales</h4><p>Screenshots por pagina afectada, deteccion de layout issues</p></div>
+</div>
+<h3>6. Data, Analytics y Gestion</h3>
+<div class="two-cols">
+<div>
+<h4>Data &amp; Analytics</h4>
+<ul>
+<li>Consultas ad-hoc en Slack (lenguaje natural → SQL)</li>
+<li>Resumenes de salud de clientes</li>
+<li>Dashboards personalizados con API v3</li>
+</ul>
+</div>
+<div>
+<h4>Gestion de Proyectos</h4>
+<ul>
+<li>PRDs en Notion → tickets Linear</li>
+<li>Planificacion masiva de backlog</li>
+<li>Documentacion desde tickets</li>
+</ul>
+</div>
+</div>
+<h3>7. Web Scraping y Capacidades Avanzadas</h3>
+<div class="two-cols">
+<div>
+<h4>Web Scraping</h4>
+<ul>
+<li>Scrapers automatizados</li>
+<li>Extraccion de datos estructurados</li>
+<li>Pipelines de contenido web</li>
+</ul>
+</div>
+<div>
+<h4>Capacidades Avanzadas</h4>
+<ul>
+<li><strong>Managed Devins</strong> — ejecucion paralela</li>
+<li><strong>Session Insights</strong> — analisis post-sesion</li>
+<li><strong>Playbooks</strong> — prompts reutilizables</li>
+<li><strong>Sesiones programadas</strong> — cron + recurrentes</li>
+<li><strong>MCP Marketplace</strong> — 100+ herramientas</li>
+</ul>
+</div>
+</div>
+<h3>8. Casos de Uso Operativos Adicionales</h3>
+<p>Ademas de los escenarios anteriores, Devin puede aplicarse de forma transversal a actividades de analisis, planificacion, desarrollo, calidad, testing, rendimiento, arquitectura, tecnologia, base de datos, documentacion, automatizacion, localizacion y soporte a reuniones.</p>
+<table>
+<thead><tr><th style="width:18%">Categoria</th><th style="width:28%">Caso de Uso</th><th>Descripcion</th></tr></thead>
+<tbody>
+<tr><td><strong>Analisis</strong></td><td>Analisis de tarea/codigo</td><td>Revision y comprension de tareas tecnicas o fragmentos de codigo.</td></tr>
+<tr><td><strong>Analisis</strong></td><td>Analisis via MCP de Jira/Confluence</td><td>Extraccion y analisis de informacion desde herramientas colaborativas.</td></tr>
+<tr><td><strong>Analisis</strong></td><td>Analisis de codigo implementado</td><td>Analisis y explicacion del codigo ya implementado.</td></tr>
+<tr><td><strong>Analisis</strong></td><td>Mejoras de rendimiento</td><td>Propuestas de mejora del rendimiento de la aplicacion.</td></tr>
+<tr><td><strong>Planificacion</strong></td><td>Analisis del codigo</td><td>Generacion de contexto tecnico a partir del codigo existente.</td></tr>
+<tr><td><strong>Planificacion</strong></td><td>Generacion del plan</td><td>Creacion de un plan de desarrollo basado en el analisis previo.</td></tr>
+<tr><td><strong>Planificacion</strong></td><td>Supervision y refinado</td><td>Seguimiento, ajuste y mejora continua del plan definido.</td></tr>
+<tr><td><strong>Desarrollo</strong></td><td>Logica HU</td><td>Desarrollo de la logica definida en la historia de usuario.</td></tr>
+<tr><td><strong>Desarrollo</strong></td><td>Alternativas de desarrollo</td><td>Planteamiento de diferentes alternativas para el desarrollo de la historia de usuario.</td></tr>
+<tr><td><strong>Calidad</strong></td><td>Revision de gaps o vulnerabilidades</td><td>Identificacion de brechas funcionales o vulnerabilidades de seguridad.</td></tr>
+<tr><td><strong>Calidad</strong></td><td>Simulacion de casuisticas criticas</td><td>Pruebas de escenarios extremos o criticos para validar robustez.</td></tr>
+<tr><td><strong>Calidad</strong></td><td>Analisis de posibles bugs</td><td>Identificacion de errores potenciales en la aplicacion.</td></tr>
+<tr><td><strong>Testing</strong></td><td>Adaptacion de test existentes</td><td>Actualizacion de pruebas ante nuevas funcionalidades.</td></tr>
+<tr><td><strong>Testing</strong></td><td>Creacion de nuevos test</td><td>Desarrollo de pruebas acordes a nuevos desarrollos.</td></tr>
+<tr><td><strong>Rendimiento</strong></td><td>Mejora de rendimiento</td><td>Optimizacion mediante deteccion de procesos inservibles y optimizacion de funciones existentes.</td></tr>
+<tr><td><strong>Arquitectura</strong></td><td>Mejora de estructura y legibilidad</td><td>Reorganizacion de servicios para mayor claridad y mantenibilidad.</td></tr>
+<tr><td><strong>Tecnologia</strong></td><td>Cambios de configuracion o librerias</td><td>Migraciones o actualizaciones tecnologicas</td></tr>
+<tr><td><strong>Base de datos</strong></td><td>Generacion de scripts BBDD</td><td>Creacion de scripts SQL o migraciones de base de datos.</td></tr>
+<tr><td><strong>Documentacion</strong></td><td>Generacion de documentacion especifica</td><td>Creacion de documentacion tecnica estructurada como README, arquitectura o endpoints.</td></tr>
+<tr><td><strong>Documentacion</strong></td><td>Generacion de diagramas de flujo</td><td>Creacion de diagramas para representar procesos, arquitectura o logica funcional.</td></tr>
+<tr><td><strong>Automatizacion</strong></td><td>Generacion de workflows</td><td>Automatizaciones como creacion dinamica de ramas Git siguiendo Git Flow.</td></tr>
+<tr><td><strong>Localizacion</strong></td><td>Traduccion de literales</td><td>Traduccion y gestion de textos para internacionalizacion.</td></tr>
+<tr><td><strong>Reuniones</strong></td><td>Resumenes de sesiones</td><td>Generacion de actas o resumenes a partir de transcripciones.</td></tr>
+<tr><td><strong>Reuniones</strong></td><td>Traduccion de lenguaje de HUs</td><td>Conversion de Historias de Usuario a lenguaje tecnico o viceversa.</td></tr>
+</tbody>
+</table>
+<div class="callout callout-info">
+<span class="callout-icon">📝</span>
+<div><strong>Encaje con los subapartados actuales:</strong> estos casos de uso amplian los escenarios ya descritos en modernizacion, calidad continua, automatizaciones y desarrollo de features, incorporando ahora un bloque especifico para tareas operativas recurrentes y apoyo al ciclo completo de desarrollo.</div>
+</div>
+<div class="callout callout-tip">
+<span class="callout-icon">💡</span>
+<div><strong>Mejores Practicas:</strong> Divide proyectos grandes en subtareas <strong>≤90 min</strong> de trabajo manual. Proporciona instrucciones paso a paso, criterios de exito claros, referencias a codigo existente y ejemplos antes/despues.</div>
+</div>
+</div>
+<!-- ===== SECCION B: QA Y TESTING ===== -->
+<div class="section" id="sec-b">
+<h2><span class="sec-icon devin">B</span> Devin para QA y Testing</h2>
+<p class="section-desc">Capacidades completas de Devin orientadas a Quality Assurance, testing y aseguramiento de calidad.</p>
+<h3>1. Generacion Automatica de Tests</h3>
+<div class="cards">
+<div class="card">
+<div class="card-icon">🎯</div>
+<h4>Tests Unitarios</h4>
+<ul>
+<li>Analiza suite existente para seguir convenciones</li>
+<li>Identifica gaps de cobertura</li>
+<li>Aumenta cobertura 1.5-2x (frecuentemente 90%+)</li>
+<li>Respeta librerias: Jest, pytest, JUnit, etc.</li>
+</ul>
+</div>
+<div class="card">
+<div class="card-icon">🔗</div>
+<h4>Tests de Integracion</h4>
+<ul>
+<li>Auto-genera para APIs y servicios</li>
+<li>Verifica interacciones entre componentes</li>
+</ul>
+</div>
+<div class="card">
+<div class="card-icon">🎬</div>
+<h4>Tests E2E</h4>
+<ul>
+<li>Usa su navegador integrado</li>
+<li>Navega UIs, rellena formularios</li>
+<li>Graba video como evidencia</li>
+</ul>
+</div>
+</div>
+<h3>2. Testing Visual y en Navegador</h3>
+<div class="flow">
+<div class="flow-step">💻 Levanta la app</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">🎨 Navega la UI</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">🎥 Graba video</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">📨 Envia evidencia</div>
+</div>
+<h3>3. Devin Review (Revision Automatica de PRs)</h3>
+<table>
+<thead><tr><th>Feature</th><th>Descripcion</th></tr></thead>
+<tbody>
+<tr><td><strong>Smart Diff</strong></td><td>Agrupa cambios logicamente, no alfabeticamente</td></tr>
+<tr><td><strong>Copy/Move Detection</strong></td><td>Detecta codigo movido o copiado</td></tr>
+<tr><td><strong>Bug Catcher</strong></td><td>Bugs automaticos: Severe / Non-severe</td></tr>
+<tr><td><strong>Flags</strong></td><td>Investigate / Informational</td></tr>
+<tr><td><strong>Auto-Review</strong></td><td>Revisa al abrir PR, push, o ready for review</td></tr>
+<tr><td><strong>Auto-Fix</strong></td><td>Corrige bugs, responde review comments, itera CI</td></tr>
+</tbody>
+</table>
+<h3>4. Remediacion de Vulnerabilidades</h3>
+<div class="flow">
+<div class="flow-step">🔎 SonarQube / Fortify detecta issue</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">🤖 Devin recibe y analiza</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">🔧 Aplica correccion</div>
+<div class="flow-arrow">→</div>
+<div class="flow-step">📥 PR para revision humana</div>
+</div>
+<div class="callout callout-info">
+<span class="callout-icon">📊</span>
+<div><strong>~70%</strong> de vulnerabilidades se resuelven automaticamente segun reportan los clientes.</div>
+</div>
+<h3>5. Tests E2E Programados</h3>
+<p>Sesiones nocturnas contra staging. Si hay fallos, Devin crea tickets y reporta por Slack automaticamente.</p>
+<h3>6. Debug y Correccion de Tests Fallidos</h3>
+<p>Devin analiza tests fallidos, determina si el bug esta en el test o la implementacion, corrige, y verifica que no hay regresiones.</p>
+<h3>7. Skills de Testing Reutilizables</h3>
+<p>Archivos <code>SKILL.md</code> en el repo para procedimientos de QA consistentes (ej: test-before-pr: instalar deps, iniciar servidor, navegar paginas, screenshots, lint, tests).</p>
+<h3>8. Playbooks de Testing</h3>
+<p>Templates reutilizables para: cobertura de tests, testing de APIs, accesibilidad, rendimiento.</p>
+<h3>9. Testing Paralelo a Escala (Managed Devins)</h3>
+<table>
+<thead><tr><th>Escenario</th><th>Descripcion</th></tr></thead>
+<tbody>
+<tr><td><strong>8 modulos overnight</strong></td><td>8 sesiones paralelas, cada una escribe tests y abre un PR</td></tr>
+<tr><td><strong>Regresion masiva</strong></td><td>Suite dividida en paquetes ejecutados simultaneamente</td></tr>
+<tr><td><strong>Evaluacion herramientas</strong></td><td>30 librerias evaluadas en paralelo</td></tr>
+</tbody>
+</table>
+<h3>10. Integraciones MCP para QA</h3>
+<table>
+<thead><tr><th>Integracion</th><th>Uso en QA</th></tr></thead>
+<tbody>
+<tr><td><strong>Sentry</strong></td><td>Recibir errores de produccion → generar fixes</td></tr>
+<tr><td><strong>Datadog</strong></td><td>Investigar incidentes, logs, root cause analysis</td></tr>
+<tr><td><strong>SonarQube</strong></td><td>Revisar y corregir issues de calidad</td></tr>
+<tr><td><strong>Bases de datos</strong></td><td>Verificar datos de test, queries de validacion</td></tr>
+<tr><td><strong>Figma</strong></td><td>Comparar implementacion con disenos</td></tr>
+</tbody>
+</table>
+<h3>11. Ciclo Completo de QA</h3>
+<div class="diagram">Codigo → Devin Review (Auto-Review) → Bug Catcher → Auto-Fix
+  |                                                            |
+  v                                                            v
+CI/CD → Tests automaticos → Fallos? → Devin investiga y corrige
+  |                                                            |
+  v                                                            v
+Deploy Staging → Tests E2E nocturnos → Reportes Slack/Jira
+  |
+  v
+Produccion → Sentry/Datadog alerts → Devin auto-triage → Fix PRs</div>
+</div>
+<!-- ===== SECCION C: EJEMPLOS REALES ===== -->
+<div class="section" id="sec-c">
+<h2><span class="sec-icon devin">C</span> Ejemplos Reales y Casos de Exito</h2>
+<p class="section-desc">Case studies, sesiones demostrativas y metricas de impacto reales.</p>
+<h3>Case Study: Nubank — Migracion ETL Legacy</h3>
+<div class="callout callout-important">
+<span class="callout-icon">🏦</span>
+<div>
+<strong>Nubank</strong> (fintech, +80M clientes) migro millones de lineas de ETL legacy con Devin, logrando <strong>8x ahorro de tiempo humano</strong> respecto a migracion manual.
+      <br/><a href="https://docs.devin.ai/use-cases/examples/sas-to-pyspark#case-study">Ver caso completo →</a>
+</div>
+</div>
+<h3>Videos y Tutoriales Demostrativos</h3>
+<table>
+<thead><tr><th>Migracion</th><th>Descripcion</th><th>Link</th></tr></thead>
+<tbody>
+<tr><td><strong>Java 8→17</strong></td><td>Miles de archivos divididos en slices paralelos</td><td><a href="https://docs.devin.ai/use-cases/examples/java-upgrades">Ver video</a></td></tr>
+<tr><td><strong>COBOL</strong></td><td>COBOL → Java/Python/C# para sector financiero</td><td><a href="https://docs.devin.ai/use-cases/examples/cobol-modernization">Ver video</a></td></tr>
+<tr><td><strong>SAS→PySpark</strong></td><td>Eliminacion de costes de licencia SAS</td><td><a href="https://docs.devin.ai/use-cases/examples/sas-to-pyspark">Ver tutorial</a></td></tr>
+<tr><td><strong>JS→TypeScript</strong></td><td>Conversion completa con tsconfig y types</td><td><a href="https://docs.devin.ai/use-cases/examples/javascript-to-typescript">Ver video</a></td></tr>
+<tr><td><strong>NoSQL→SQL</strong></td><td>MongoDB → PostgreSQL con normalizacion</td><td><a href="https://docs.devin.ai/use-cases/examples/nosql-to-sql">Ver video</a></td></tr>
+</tbody>
+</table>
+<h3>Sesiones Reales con Links Directos</h3>
+<table>
+<thead><tr><th>Sesion</th><th>Descripcion</th></tr></thead>
+<tbody>
+<tr><td><a href="https://docs.devin.ai/use-cases/tutorials/code-coverage">Code Coverage Tutorial</a></td><td>Cobertura sube de 28% a 57% en &lt;10 minutos</td></tr>
+<tr><td><a href="https://app.devin.ai/sessions/8965de5e3ae0436985bf3dd2e1a5b4af">Connect4 Refactor</a></td><td>Refactoring completo con mejora de tests</td></tr>
+<tr><td><a href="https://app.devin.ai/sessions/dc70fe0649cb4041852da384e65d42be">Scraping eBay</a></td><td>Productos de eBay con paginacion</td></tr>
+<tr><td><a href="https://app.devin.ai/sessions/8c6edbbb0bce4b70acd09255e1994c0b">Scraping YouTube</a></td><td>Metadata de playlists de YouTube</td></tr>
+<tr><td><a href="https://app.devin.ai/sessions/4f8a7b129820493b9c0ca140cddede50">Scraping Emojis</a></td><td>Datos Unicode procesados a formatos legibles</td></tr>
+</tbody>
+</table>
+<h3>Integraciones MCP en Accion</h3>
+<div class="cards">
+<div class="card"><div class="card-icon">🚨</div><h4>Sentry</h4><p>Issues de Sentry → Devin los resuelve directamente</p></div>
+<div class="card"><div class="card-icon">📈</div><h4>Datadog</h4><p>Root cause de incidentes + apertura de PRs</p></div>
+<div class="card"><div class="card-icon">🎨</div><h4>Figma</h4><p>Construir componentes desde mockups de diseno</p></div>
+<div class="card"><div class="card-icon">📋</div><h4>Linear + Zapier</h4><p>Tickets desde Slack, conexion con 100+ apps</p></div>
+</div>
+<p style="font-size:0.9em; color:var(--text-medium);">Todos los videos disponibles en <a href="https://docs.devin.ai/use-cases/tutorials/mcp-use-cases">docs.devin.ai/use-cases/tutorials/mcp-use-cases</a></p>
+<h3>Metricas de Impacto</h3>
+<div class="stats">
+<div class="stat"><div class="stat-value">6-12x</div><div class="stat-label">Eficiencia general</div></div>
+<div class="stat"><div class="stat-value">8x</div><div class="stat-label">Ahorro en migraciones (Nubank)</div></div>
+<div class="stat"><div class="stat-value">1.5-2x</div><div class="stat-label">Aumento cobertura tests</div></div>
+<div class="stat"><div class="stat-value">~70%</div><div class="stat-label">Vulnerabilidades auto-fix</div></div>
+</div>
+<h3>Relevancia para Santander (GSC-OPTCL)</h3>
+<table>
+<thead><tr><th>Area</th><th>Aplicacion</th></tr></thead>
+<tbody>
+<tr><td><strong>PyTalos / TalosBDD</strong></td><td>Generacion automatica de tests BDD, step definitions, feature files</td></tr>
+<tr><td><strong>SonarQube</strong></td><td>Correccion auto de issues de calidad (playbook activo)</td></tr>
+<tr><td><strong>Fortify SAST</strong></td><td>Remediacion de vulnerabilidades High/Critical (playbook activo)</td></tr>
+<tr><td><strong>Docker/Sysdig</strong></td><td>Actualizacion de imagenes Docker (playbook activo)</td></tr>
+<tr><td><strong>CI/CD Workflows</strong></td><td>Mantenimiento de GitHub Actions workflows</td></tr>
+</tbody>
+</table>
+</div>
+<!-- ===== SECCION D: MANUAL DEVIN ===== -->
+<div class="section" id="sec-d">
+<h2><span class="sec-icon devin">D</span> Manual para Primeros Usuarios de Devin</h2>
+<p class="section-desc">Guia completa de inicio: desde la configuracion hasta el uso avanzado.</p>
+<h3>1. Que es Devin</h3>
+<p>Ingeniero de software autonomo con IA de Cognition AI. Puede escribir codigo, ejecutar comandos en Linux, crear PRs, navegar la web, probar su trabajo y trabajar en paralelo.</p>
+<div class="callout callout-important">
+<span class="callout-icon">⚡</span>
+<div><strong>Regla de complejidad:</strong> Si una tarea te tomaria 3 horas o menos, Devin probablemente puede hacerla. Para tareas mas grandes, divide en sesiones enfocadas y ejecuta en paralelo.</div>
+</div>
+<h3>2. Configuracion Inicial</h3>
+<div class="cards">
+<div class="card">
+<div class="card-icon">🔐</div>
+<h4>Acceso</h4>
+<p>Accede a <a href="https://app.devin.ai">app.devin.ai</a> con credenciales de la organizacion</p>
+</div>
+<div class="card">
+<div class="card-icon">📚</div>
+<h4>Indexar Repos</h4>
+<p>Settings &gt; Repositories &gt; Index repo. Habilita Ask Devin y DeepWiki</p>
+</div>
+<div class="card">
+<div class="card-icon">💻</div>
+<h4>Repo Setup (8 pasos)</h4>
+<p>Git Pull, Secrets, Install Deps, Maintain Deps, Lint, Tests, Run App, Notes</p>
+</div>
+</div>
+<h3>3. La Interfaz</h3>
+<table>
+<thead><tr><th>Pestana</th><th>Descripcion</th></tr></thead>
+<tbody>
+<tr><td><strong>Progress</strong></td><td>Vista unificada: comandos, ediciones, navegador</td></tr>
+<tr><td><strong>Shell</strong></td><td>Terminal con historial completo. Puedes tomar el control</td></tr>
+<tr><td><strong>IDE (VSCode)</strong></td><td>Editor completo. Atajos: <kbd>Cmd+K</kbd> genera comandos, <kbd>Cmd+I</kbd> ediciones rapidas, <kbd>Tab</kbd> autocomplete</td></tr>
+<tr><td><strong>Navegador</strong></td><td>Interactivo: CAPTCHAs, MFA, testing de apps</td></tr>
+</tbody>
+</table>
+<h3>4. Ask vs Agent</h3>
+<div class="two-cols">
+<div class="card">
+<h4>💬 Ask (Preguntar)</h4>
+<p>Modo ligero para explorar codebase y planificar. No hace cambios de codigo.</p>
+<ul>
+<li>Preguntas sobre arquitectura</li>
+<li>Explorar dependencias</li>
+<li>Generar prompts con contexto</li>
+</ul>
+</div>
+<div class="card">
+<h4>🤖 Agent (Agente)</h4>
+<p>Modo autonomo completo. Escribe codigo, ejecuta comandos, crea PRs.</p>
+<ul>
+<li>Implementar features</li>
+<li>Corregir bugs</li>
+<li>Ejecutar tests</li>
+</ul>
+</div>
+</div>
+<p style="margin-top:12px;"><strong>Tipos de agente:</strong> <span class="pill pill-devin">Devin</span> (general)   <span class="pill pill-devin">Fast</span> (tareas rapidas)   <span class="pill pill-devin">Dana</span> (data analyst)</p>
+<h3>5. Como Escribir Prompts Efectivos</h3>
+<table>
+<thead><tr><th>Elemento</th><th>Ejemplo</th></tr></thead>
+<tbody>
+<tr><td><strong>Contexto</strong></td><td>"En el repo de pagos, necesitamos..."</td></tr>
+<tr><td><strong>Instrucciones paso a paso</strong></td><td>"1. Crea un background task que..."</td></tr>
+<tr><td><strong>Criterios de exito</strong></td><td>"El test debe pasar con cobertura &gt; 80%"</td></tr>
+<tr><td><strong>Referencias</strong></td><td>"Referencia OrderModel.js para el patron"</td></tr>
+<tr><td><strong>Archivos especificos</strong></td><td>"Modifica statsController.js..."</td></tr>
+<tr><td><strong>Links a docs</strong></td><td>"Lee https://sequelize.org/docs/..."</td></tr>
+<tr><td><strong>Validacion</strong></td><td>"Ejecuta <code>npm test</code> y verifica..."</td></tr>
+</tbody>
+</table>
+<h4>Buenos vs Malos Prompts</h4>
+<div class="prompt-example">
+<div class="prompt-label good">BUENO</div>
+<pre><code>Crea un nuevo endpoint /users/stats que retorne un JSON con conteo 
+de usuarios y edad promedio. Usa nuestra tabla users en PostgreSQL. 
+Referencia /orders/stats en statsController.js. Cubre con tests.</code></pre>
+</div>
+<div class="prompt-example">
+<div class="prompt-label bad">MALO</div>
+<pre><code>Agrega un endpoint de estadisticas de usuarios.</code></pre>
+</div>
+<h3>6. Menciones @ y Slash Commands</h3>
+<div class="two-cols">
+<div>
+<h4>Menciones @</h4>
+<table>
+<tbody>
+<tr><td><code>@Repos</code></td><td>Repositorio</td></tr>
+<tr><td><code>@Files</code></td><td>Archivo especifico</td></tr>
+<tr><td><code>@Macros</code></td><td>Knowledge por macro</td></tr>
+<tr><td><code>@Playbooks</code></td><td>Playbook del equipo</td></tr>
+<tr><td><code>@Skills</code></td><td>Skill del repo</td></tr>
+<tr><td><code>@Secrets</code></td><td>Secret especifico</td></tr>
+<tr><td><code>@Sessions</code></td><td>Sesion previa</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h4>Slash Commands /</h4>
+<table>
+<tbody>
+<tr><td><code>/plan</code></td><td>Planificar antes de implementar</td></tr>
+<tr><td><code>/review</code></td><td>Code review completo</td></tr>
+<tr><td><code>/test</code></td><td>Tests y cobertura</td></tr>
+<tr><td><code>/think-hard</code></td><td>Pensar mas cuidadosamente</td></tr>
+<tr><td><code>/implement</code></td><td>Implementar feature</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<h3>7. Knowledge</h3>
+<p>Coleccion de tips e instrucciones que Devin consulta <strong>automaticamente</strong> en todas las sesiones.</p>
+<ul>
+<li><strong>Crear:</strong> Settings &gt; Knowledge &gt; Add Knowledge</li>
+<li><strong>Macros:</strong> Asigna un nombre (ej: <code>!deploy-checklist</code>) para referencia rapida</li>
+<li><strong>Fijar a repos:</strong> Sin repo (relevancia), repo especifico (siempre), todos los repos (global)</li>
+</ul>
+<h3>8. Playbooks</h3>
+<p>Prompts reutilizables y compartibles para tareas repetidas. Estructura recomendada:</p>
+<pre><code>## Overview          — Resultado esperado
+## What's Needed     — Inputs del usuario
+## Procedure         — Pasos paso a paso
+## Specifications    — Postcondiciones
+## Advice            — Tips
+## Forbidden Actions — Lo que NO debe hacer</code></pre>
+<div class="callout callout-info">
+  <span class="callout-icon">📊</span>
+  <div>
+    <strong>Ejemplo real de uso de Playbooks :</strong> Ranking de los playbooks más utilizados, mostrando su aplicación práctica en seguridad, automatización, testing y operación.
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:5%">#</th>
+      <th style="width:30%">Playbook</th>
+      <th>Resumen</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><strong>TI - CIB Fortify + Trivy</strong></td>
+      <td>Ejecuta análisis unificado de vulnerabilidades (SAST/SCA) con Fortify y Trivy, generando reportes y planes de remediación.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><strong>Cierre de Versiones de Sprint</strong></td>
+      <td>Orquesta el cierre de versiones de microservicios, gestionando PRs, releases y versionado.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>TI - Version Tracker</strong></td>
+      <td>Genera reportes de versiones tecnológicas y detecta inconsistencias en librerías y repositorios.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><strong>Modifying Integration Module Tables</strong></td>
+      <td>Gestiona modificaciones en tablas de integración y genera cambios DML y PRs asociados.</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><strong>Review OpenAPI Specification PRs Against Checklist</strong></td>
+      <td>Revisión de APIs contra checklist de calidad, asegurando consistencia y buenas prácticas.</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>Update microservices Manager</strong></td>
+      <td>Migración y actualización de microservicios a nuevas versiones tecnológicas.</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><strong>TI - Teams meet resume</strong></td>
+      <td>Genera actas estructuradas de reuniones con puntos clave y próximos pasos.</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><strong>Testing Microfrontend v2</strong></td>
+      <td>Generación de tests unitarios para microfrontends con cobertura mínima y métricas.</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td><strong>TI - SonarQube Code Smells - Analysis & Fix</strong></td>
+      <td>Análisis y corrección automática de code smells, generando PRs y reportes.</td>
+    </tr>
+  </tbody>
+</table>
+<h3>9. Secrets</h3>
+<table>
+<thead><tr><th>Tipo</th><th>Alcance</th><th>Formato</th></tr></thead>
+<tbody>
+<tr><td>Global</td><td>Toda la organizacion</td><td rowspan="4">Raw Secret, Site Cookies, TOTP</td></tr>
+<tr><td>Personal</td><td>Solo tu usuario</td></tr>
+<tr><td>Repo-especifico</td><td>Solo ese repo</td></tr>
+<tr><td>Session</td><td>Solo la sesion actual</td></tr>
+</tbody>
+</table>
+<h3>10. Devin Review</h3>
+<p>Smart Diff + Bug Catcher + Auto-Fix + Chat con contexto.</p>
+<ul>
+<li><strong>Acceso:</strong> <code>app.devin.ai/review</code> | Reemplaza <code>github.com</code> por <code>devinreview.com</code></li>
+<li><strong>Auto-Review:</strong> Settings &gt; Review &gt; Add myself</li>
+<li><strong>REVIEW.md:</strong> Reglas custom de revision en el repo</li>
+</ul>
+<h3>11. Integraciones</h3>
+<div class="cards">
+<div class="card">
+<h4>💬 Slack</h4>
+<p><code>@Devin</code> en Slack. Comandos: <code>!ask</code> <code>!deep</code> <code>!fast</code> <code>!dana</code> <code>mute</code> <code>sleep</code> <code>EXIT</code></p>
+</div>
+<div class="card">
+<h4>🐙 GitHub/GitLab</h4>
+<p>PRs, review automatico, comentarios, CI iteration</p>
+</div>
+<div class="card">
+<h4>📋 Jira/Linear</h4>
+<p>Implementar desde tickets, actualizar estado, crear issues</p>
+</div>
+</div>
+<h3>12. MCP Marketplace</h3>
+<div class="cards">
+<div class="card"><h4>Sentry</h4><p>Errores de produccion</p></div>
+<div class="card"><h4>Datadog</h4><p>Logs, metricas, trazas</p></div>
+<div class="card"><h4>SonarQube</h4><p>Calidad de codigo</p></div>
+<div class="card"><h4>Figma</h4><p>Disenos y tokens</p></div>
+<div class="card"><h4>PostgreSQL/MySQL</h4><p>Consultar bases de datos</p></div>
+<div class="card"><h4>Stripe</h4><p>Pagos y facturacion</p></div>
+</div>
+<p style="font-size:0.88em; color:var(--text-medium);">+ Notion, Linear, Jira, CircleCI, Vercel, Netlify, Playwright, Firecrawl y mas. MCPs custom soportados via STDIO, SSE o HTTP.</p>
+<h3>13. Sesiones Programadas</h3>
+<p>Crear: Menu (...) &gt; Schedule Devin | Settings &gt; Schedules</p>
+<p>Opciones: Recurrente/Una vez, Agente (Devin/Dana/Advanced), Playbook, Repos, Frecuencia (cron), Notificaciones (email/Slack)</p>
+<h3>14. Session Insights</h3>
+<table>
+<thead><tr><th>Metrica</th><th>Descripcion</th></tr></thead>
+<tbody>
+<tr><td><strong>ACU Usage</strong></td><td>Consumo de compute (menor = mas eficiente)</td></tr>
+<tr><td><strong>User Messages</strong></td><td>Mensajes enviados (menor = mejor prompt)</td></tr>
+<tr><td><strong>Session Size</strong></td><td>XS, S, M, L, XL — L/XL = no saludable</td></tr>
+</tbody>
+</table>
+<p><strong>Pestanas:</strong> Issue Timeline | Actionable Feedback (prompt mejorado) | Knowledge Usage</p>
+<h3>15. Mejores Practicas</h3>
+<table>
+<thead><tr><th style="color:#27ae60;">DO</th><th style="color:#e74c3c;">DON'T</th></tr></thead>
+<tbody>
+<tr><td>Se especifico y opinionado</td><td>Dejar decisiones abiertas</td></tr>
+<tr><td>Da instrucciones paso a paso</td><td>Instrucciones vagas</td></tr>
+<tr><td>Define criterios de exito claros</td><td>"Asegurate de que funcione"</td></tr>
+<tr><td>Referencia codigo existente</td><td>Asumir que Devin conoce tu proyecto</td></tr>
+<tr><td>Links a documentacion</td><td>Esperar que busque todo</td></tr>
+<tr><td>Usa Playbooks y Knowledge</td><td>Repetir instrucciones siempre</td></tr>
+</tbody>
+</table>
+<h3>16. Resolucion de Problemas</h3>
+<table>
+<thead><tr><th>Problema</th><th>Solucion</th></tr></thead>
+<tbody>
+<tr><td>No ejecuta lint/test</td><td>Revisar Repo Setup, probar comandos manualmente</td></tr>
+<tr><td>Sesiones L/XL</td><td>Dividir en sub-tareas. Revisar Issue Timeline</td></tr>
+<tr><td>Knowledge enganoso</td><td>Revisar Knowledge Usage, actualizar o eliminar</td></tr>
+<tr><td>No sigue patron</td><td>Referenciar archivos especificos, agregar Knowledge</td></tr>
+<tr><td>Auth fallida</td><td>Verificar Secrets, revisar cookies, usar navegador</td></tr>
+</tbody>
+</table>
+<h3>Checklist del Primer Dia con Devin</h3>
+<ul class="checklist">
+<li>Acceder a <a href="https://app.devin.ai">app.devin.ai</a> y verificar credenciales</li>
+<li>Indexar los repositorios principales del equipo</li>
+<li>Configurar el entorno (Repo Setup) para al menos 1 repo</li>
+<li>Configurar Secrets necesarios (API keys, credenciales)</li>
+<li>Conectar integracion de Slack</li>
+<li>Hacer tu primera pregunta con <strong>Ask Devin</strong></li>
+<li>Ejecutar tu primera sesion <strong>Agent</strong> con tarea pequena</li>
+<li>Revisar <strong>Session Insights</strong> de tu primera sesion</li>
+<li>Crear al menos un <strong>Knowledge</strong> con convencion del equipo</li>
+<li>Explorar el <strong>MCP Marketplace</strong></li>
+<li>Configurar <strong>Devin Review</strong> para auto-review</li>
+</ul>
+<h3>Recursos</h3>
+<p>
+<a href="https://docs.devin.ai">docs.devin.ai</a> •
+    <a href="https://app.devin.ai">app.devin.ai</a> •
+    <a href="https://app.devin.ai/review">Devin Review</a> •
+    <a href="https://docs.devin.ai/use-cases">Casos de Uso</a> •
+    <a href="https://docs.devin.ai/essential-guidelines/prompt-templates-cheat-sheet">Prompt Templates</a>
+</p>
+</div>
+<!-- ============================================================ -->
+<!-- PARTE II - WINDSURF                                           -->
+<!-- ============================================================ -->
+<div class="part-header windsurf">
+<div class="part-icon">🌬</div>
+<h2>PARTE II — WINDSURF</h2>
+<p>IDE con IA Integrada • Desarrollado por Codeium</p>
+</div>
+<!-- ===== SECCION E: CASOS DE USO WINDSURF ===== -->
+<div class="section" id="sec-e">
+<h2><span class="sec-icon windsurf">E</span> Casos de Uso Destacados de Windsurf</h2>
+<p class="section-desc">IDE basado en VS Code con inteligencia artificial profundamente integrada.</p>
+<div class="cards">
+<div class="card"><div class="card-icon">🌊</div><h4>Cascade</h4><p>Agente multi-paso: crea archivos, ejecuta comandos, instala deps, edita multiples archivos</p></div>
+<div class="card"><div class="card-icon">⚡</div><h4>Supercomplete</h4><p>Autocompletado predictivo: bloques completos de codigo basados en contexto</p></div>
+<div class="card"><div class="card-icon">✎</div><h4>Inline Edit</h4><p><kbd>Cmd+I</kbd>: edicion de codigo con IA directamente en el editor</p></div>
+<div class="card"><div class="card-icon">💬</div><h4>Chat</h4><p>Q&amp;A sobre tu codebase con contexto completo del proyecto</p></div>
+<div class="card"><div class="card-icon">🖥</div><h4>Terminal</h4><p>Sugerencia de comandos, fix automatico de errores</p></div>
+<div class="card"><div class="card-icon">🔄</div><h4>Multi-archivo</h4><p>Editar modelo + migracion + schema + form + tests en una accion</p></div>
+</div>
+<h3>Desarrollo con Cascade</h3>
+<div class="prompt-example">
+<div class="prompt-label good">EJEMPLO DE PROMPT</div>
+<pre><code>Agrega autenticacion JWT al endpoint /api/users. 
+Crea el middleware, los endpoints de login/register, 
+y actualiza las rutas existentes para requerir autenticacion.</code></pre>
+</div>
+<p><strong>Cascade ejecuta:</strong> Crea <code>middleware/auth.js</code>, crea <code>routes/auth.js</code>, modifica <code>routes/users.js</code>, actualiza <code>app.js</code>, instala <code>jsonwebtoken</code> + <code>bcrypt</code>, genera tests.</p>
+<h3>Supercomplete: Autocompletado Predictivo</h3>
+<p>Va mas alla del autocompletado tradicional: predice <strong>bloques completos de codigo</strong> basandose en contexto del archivo, archivos relacionados y patrones del desarrollador.</p>
+<h3>Casos de Uso por Area</h3>
+<div class="cards">
+<div class="card">
+<h4>🔧 Refactoring</h4>
+<ul>
+<li>Extraer componentes React</li>
+<li>Aplicar patrones de diseno</li>
+<li>Eliminar codigo muerto</li>
+<li>Renombrar cross-file</li>
+</ul>
+</div>
+<div class="card">
+<h4>🧪 Testing</h4>
+<ul>
+<li>Tests unitarios con mocks</li>
+<li>Tests de integracion API</li>
+<li>Aumentar cobertura</li>
+<li>E2E con Playwright/Cypress</li>
+</ul>
+</div>
+<div class="card">
+<h4>🐛 Debugging</h4>
+<ul>
+<li>Lee error, identifica causa</li>
+<li>Propone y aplica fix</li>
+<li>Re-ejecuta comando</li>
+<li>Corrige TS/ESLint errors</li>
+</ul>
+</div>
+<div class="card">
+<h4>📄 Documentacion</h4>
+<ul>
+<li>JSDoc/Docstrings automaticos</li>
+<li>README completo</li>
+<li>OpenAPI/Swagger para APIs</li>
+</ul>
+</div>
+<div class="card">
+<h4>🔄 Migraciones</h4>
+<ul>
+<li>JS → TypeScript</li>
+<li>Class → Hooks (React)</li>
+<li>React Router v5 → v6</li>
+<li>Sequelize → Prisma</li>
+</ul>
+</div>
+<div class="card">
+<h4>🎨 Frontend</h4>
+<ul>
+<li>Componentes desde descripcion</li>
+<li>Responsive design</li>
+<li>Accesibilidad (aria, keyboard)</li>
+<li>Animaciones CSS</li>
+</ul>
+</div>
+<div class="card">
+<h4>💻 Backend</h4>
+<ul>
+<li>CRUD completo</li>
+<li>APIs con validacion Zod</li>
+<li>Middleware rate limiting</li>
+<li>Optimizacion de queries</li>
+</ul>
+</div>
+<div class="card">
+<h4>📦 DevOps</h4>
+<ul>
+<li>Dockerfiles optimizados</li>
+<li>docker-compose.yml</li>
+<li>Migraciones de BD</li>
+<li>Scripts de terminal</li>
+</ul>
+</div>
+</div>
+<h3>Casos de Uso por Rol</h3>
+<table>
+<thead><tr><th>Rol</th><th>Casos de Uso Principales</th></tr></thead>
+<tbody>
+<tr><td><strong>Frontend Dev</strong></td><td>Componentes, responsive, accesibilidad, migraciones de frameworks</td></tr>
+<tr><td><strong>Backend Dev</strong></td><td>CRUD, APIs con docs, queries optimizadas, Docker</td></tr>
+<tr><td><strong>QA Engineer</strong></td><td>Tests unitarios/E2E, cobertura, debug de tests, accesibilidad</td></tr>
+<tr><td><strong>Tech Lead</strong></td><td>Code reviews, refactoring a escala, migraciones, documentacion, onboarding</td></tr>
+</tbody>
+</table>
+</div>
+<!-- ===== SECCION F: MANUAL WINDSURF ===== -->
+<div class="section" id="sec-f">
+<h2><span class="sec-icon windsurf">F</span> Manual para Primeros Usuarios de Windsurf</h2>
+<p class="section-desc">Guia completa de inicio y uso efectivo del IDE con IA.</p>
+<h3>1. Que es Windsurf</h3>
+<p>IDE con IA integrada creado por <strong>Codeium</strong>, basado en VS Code. A diferencia de una extension, la IA esta integrada en el <strong>nucleo</strong> del editor. La IA puede tomar acciones: crear archivos, ejecutar comandos, instalar dependencias y editar multiples archivos coordinadamente.</p>
+<h3>2. Instalacion</h3>
+<table>
+<thead><tr><th>Requisito</th><th>Detalle</th></tr></thead>
+<tbody>
+<tr><td><strong>OS</strong></td><td>Windows 10+, macOS 10.15+, Ubuntu 18.04+</td></tr>
+<tr><td><strong>RAM</strong></td><td>4 GB min (8 GB+ recomendado)</td></tr>
+<tr><td><strong>Disco</strong></td><td>~500 MB</td></tr>
+<tr><td><strong>Instalacion</strong></td><td><a href="https://windsurf.com">windsurf.com</a> &gt; Download &gt; Ejecutar instalador &gt; Crear cuenta &gt; Importar VS Code (opcional)</td></tr>
+</tbody>
+</table>
+<h3>3. La Interfaz</h3>
+<div class="diagram">+-----------------------------------------------------+
+|  Menu Bar                                            |
++--------+----------------------------------+---------+
+|        |                                  |         |
+| Side   |     Editor Principal             |  Panel  |
+| Bar    |     (codigo)                     |  IA     |
+|        |                                  | Cascade |
+| Files  |                                  |  Chat   |
+| Search |                                  | History |
+| Git    |                                  |         |
+| Debug  |                                  |         |
++--------+----------------------------------+---------+
+|  Terminal / Output / Problems                        |
++-----------------------------------------------------+
+|  Status Bar                                          |
++-----------------------------------------------------+</div>
+<h3>4. Cascade: El Agente IA</h3>
+<p>Abrir: <kbd>Cmd/Ctrl+Shift+L</kbd></p>
+<div class="cards">
+<div class="card">
+<h4>Que puede hacer</h4>
+<ul>
+<li>Leer y analizar multiples archivos</li>
+<li>Crear y editar archivos</li>
+<li>Ejecutar comandos en terminal</li>
+<li>Instalar dependencias</li>
+<li>Iterar sobre errores</li>
+</ul>
+</div>
+<div class="card">
+<h4>Controles</h4>
+<ul>
+<li><strong>Accept / Accept All</strong> — Acepta cambio(s)</li>
+<li><strong>Reject</strong> — Rechaza cambio</li>
+<li><strong>Stop</strong> — Detiene Cascade</li>
+<li><strong>Retry</strong> — Reintenta</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-tip">
+<span class="callout-icon">💡</span>
+<div><strong>Cascade vs Chat:</strong> Usa Cascade para features, refactoring y bugs complejos (edita multiples archivos, ejecuta comandos). Usa Chat para preguntas, explicaciones y sugerencias (solo responde, no modifica).</div>
+</div>
+<h3>5. Supercomplete</h3>
+<table>
+<thead><tr><th>Atajo</th><th>Accion</th></tr></thead>
+<tbody>
+<tr><td><kbd>Tab</kbd></td><td>Aceptar sugerencia</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Rechazar sugerencia</td></tr>
+<tr><td><kbd>Alt+]</kbd> / <kbd>Alt+[</kbd></td><td>Navegar alternativas</td></tr>
+<tr><td><kbd>Cmd+Right</kbd></td><td>Aceptar parcialmente (palabra a palabra)</td></tr>
+</tbody>
+</table>
+<h3>6. Edicion Inline</h3>
+<p>Selecciona codigo → <kbd>Cmd/Ctrl+I</kbd> → Escribe instruccion → Revisa diff → Acepta/Rechaza</p>
+<p><strong>Ideal para:</strong> Agregar tipos TS, convertir funciones, agregar validacion, optimizar rendimiento, agregar logging.</p>
+<h3>7. Chat con IA</h3>
+<p>Abrir: <kbd>Cmd/Ctrl+L</kbd>. Referencias: <code>@archivo</code> para contexto, <code>@codebase</code> para proyecto completo.</p>
+<p><strong>Preguntas utiles:</strong> Comprension ("¿Que hace esto?"), Planificacion ("¿Como implementar cache?"), Debugging ("¿Por que falla este test?")</p>
+<h3>8. Flows: Memoria Persistente</h3>
+<p>Recuerda contexto entre sesiones: archivos visitados, cambios realizados, decisiones tomadas. Accede desde la pestana <strong>History</strong>.</p>
+<h3>9. Modelos de IA</h3>
+<table>
+<thead><tr><th>Tarea</th><th>Modelo Recomendado</th></tr></thead>
+<tbody>
+<tr><td>Autocompletado rapido</td><td>Windsurf / GPT-4o</td></tr>
+<tr><td>Feature compleja</td><td>Claude 3.7 Sonnet</td></tr>
+<tr><td>Refactoring grande</td><td>Claude 3.5 Sonnet</td></tr>
+<tr><td>Preguntas rapidas</td><td>GPT-4o</td></tr>
+<tr><td>Debug complejo</td><td>Claude 3.7 Sonnet</td></tr>
+<tr><td>Generacion de tests</td><td>Claude 3.5 Sonnet / GPT-4o</td></tr>
+</tbody>
+</table>
+<h3>10. Atajos de Teclado</h3>
+<div class="two-cols">
+<div>
+<h4>Atajos de IA</h4>
+<table>
+<tbody>
+<tr><td><kbd>Cmd/Ctrl+I</kbd></td><td>Edicion inline</td></tr>
+<tr><td><kbd>Cmd/Ctrl+L</kbd></td><td>Chat</td></tr>
+<tr><td><kbd>Cmd/Ctrl+Shift+L</kbd></td><td>Cascade</td></tr>
+<tr><td><kbd>Tab</kbd></td><td>Aceptar sugerencia</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Rechazar sugerencia</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h4>Editor (VS Code)</h4>
+<table>
+<tbody>
+<tr><td><kbd>Cmd/Ctrl+P</kbd></td><td>Quick Open</td></tr>
+<tr><td><kbd>Cmd/Ctrl+Shift+P</kbd></td><td>Command Palette</td></tr>
+<tr><td><kbd>Cmd/Ctrl+B</kbd></td><td>Toggle sidebar</td></tr>
+<tr><td><kbd>Cmd/Ctrl+`</kbd></td><td>Toggle terminal</td></tr>
+<tr><td><kbd>F12</kbd></td><td>Ir a definicion</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<h3>11. Prompts Efectivos</h3>
+<div class="prompt-example">
+<div class="prompt-label good">BUENO</div>
+<pre><code>En src/services/userService.ts, agrega un metodo 
+updateProfile(userId: string, data: UpdateProfileDTO) 
+que actualice solo los campos proporcionados en la BD. 
+Usa el patron de partial update como en orderService.ts. 
+Lanza NotFoundError si el usuario no existe.</code></pre>
+</div>
+<div class="prompt-example">
+<div class="prompt-label bad">MALO</div>
+<pre><code>Haz que se pueda actualizar el perfil</code></pre>
+</div>
+<h3>12. Extensiones VS Code</h3>
+<p>Compatible con la mayoria de extensiones. Puede importar todas tus extensiones, configuraciones y keybindings desde VS Code.</p>
+<p><strong>Recomendadas:</strong> ESLint, Prettier, GitLens, Error Lens, Docker, Thunder Client, Path Intellisense</p>
+<h3>13. Planes y Precios</h3>
+<table>
+<thead><tr><th>Caracteristica</th><th>Free ($0)</th><th>Pro (~$15/mes)</th><th>Enterprise</th></tr></thead>
+<tbody>
+<tr><td>Autocompletado</td><td>Basico</td><td>Supercomplete</td><td>Supercomplete</td></tr>
+<tr><td>Chat</td><td>Limitado</td><td>Ilimitado</td><td>Ilimitado</td></tr>
+<tr><td>Cascade</td><td>Limitado</td><td>Creditos amplios</td><td>Ilimitado</td></tr>
+<tr><td>Modelos</td><td>Basicos</td><td>GPT-4o, Claude 3.5/3.7</td><td>Todos + custom</td></tr>
+<tr><td>SSO/SAML</td><td>—</td><td>—</td><td>Si</td></tr>
+<tr><td>On-premise</td><td>—</td><td>—</td><td>Si</td></tr>
+</tbody>
+</table>
+<h3>14. Configuracion Avanzada</h3>
+<div class="two-cols">
+<div>
+<h4><code>.windsurfrules</code></h4>
+<p>Instrucciones globales para la IA en la raiz del proyecto:</p>
+<pre><code>Este proyecto usa:
+- TypeScript strict mode
+- React 18 con hooks
+- Tailwind CSS
+Convenciones:
+- Nunca usar "any"
+- Imports con @/</code></pre>
+</div>
+<div>
+<h4><code>.codeiumignore</code></h4>
+<p>Excluir archivos del contexto IA (similar a .gitignore):</p>
+<pre><code>node_modules/
+dist/
+build/
+*.min.js
+.env
+coverage/</code></pre>
+</div>
+</div>
+<h3>15. Resolucion de Problemas</h3>
+<table>
+<thead><tr><th>Problema</th><th>Solucion</th></tr></thead>
+<tbody>
+<tr><td>Autocompletado no aparece</td><td>Reiniciar Windsurf. Verificar cuenta y creditos</td></tr>
+<tr><td>Cascade lento</td><td>Crear <code>.codeiumignore</code>. Reducir archivos en contexto</td></tr>
+<tr><td>Sugerencias irrelevantes</td><td>Crear <code>.windsurfrules</code>. Abrir archivos relacionados. Cambiar modelo</td></tr>
+<tr><td>Modifica archivos incorrectos</td><td>Ser especifico en prompt. Usar "Reject"</td></tr>
+<tr><td>Se acabaron creditos</td><td>Esperar ciclo mensual o actualizar a Pro</td></tr>
+</tbody>
+</table>
+<h3>Checklist del Primer Dia con Windsurf</h3>
+<ul class="checklist">
+<li>Descargar e instalar desde <a href="https://windsurf.com">windsurf.com</a></li>
+<li>Crear cuenta (Free para empezar)</li>
+<li>Importar configuraciones de VS Code (si aplica)</li>
+<li>Abrir tu proyecto principal</li>
+<li>Crear archivo <code>.windsurfrules</code></li>
+<li>Crear archivo <code>.codeiumignore</code></li>
+<li>Probar <strong>Supercomplete</strong> escribiendo una funcion</li>
+<li>Probar <strong>Inline Edit</strong> (<kbd>Cmd+I</kbd>)</li>
+<li>Probar <strong>Chat</strong> (<kbd>Cmd+L</kbd>) preguntando sobre tu codebase</li>
+<li>Probar <strong>Cascade</strong> con una tarea pequena</li>
+<li>Instalar extensiones de VS Code favoritas</li>
+</ul>
+<h3>Recursos</h3>
+<p>
+<a href="https://windsurf.com">windsurf.com</a> •
+    <a href="https://docs.windsurf.com">docs.windsurf.com</a> •
+    <a href="https://codeium.com/blog">Blog Codeium</a> •
+    Discord de Windsurf •
+    support@codeium.com
+  </p>
+</div>
+<!-- ============================================================ -->
+<!-- PARTE III - COMPARATIVA                                       -->
+<!-- ============================================================ -->
+<div class="part-header compare">
+<div class="part-icon">⚖</div>
+<h2>PARTE III — COMPARATIVA</h2>
+<p>Devin vs Windsurf: Cuando Usar Cada Uno</p>
+</div>
+<div class="section" id="sec-g">
+<h2><span class="sec-icon compare">G</span> Devin vs Windsurf: Comparativa y Complementariedad</h2>
+<p class="section-desc">Ambas herramientas son complementarias. Aqui se detalla cuando y como usar cada una.</p>
+<h3>Tabla Comparativa Completa</h3>
+<table class="compare-table">
+<thead>
+<tr><th>Aspecto</th><th style="background:var(--devin-bg); color:var(--devin-primary);">🤖 Devin</th><th style="background:var(--wind-bg); color:#00896e;">🌬 Windsurf</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>Tipo</strong></td><td>Agente autonomo en la nube</td><td>IDE local con IA integrada</td></tr>
+<tr><td><strong>Interaccion</strong></td><td>Delegacion completa de tareas</td><td>Dev guia en tiempo real</td></tr>
+<tr><td><strong>Entorno</strong></td><td>VM propia (shell, IDE, browser)</td><td>Maquina local del desarrollador</td></tr>
+<tr><td><strong>Autonomia</strong></td><td>Alta — trabaja independientemente</td><td>Media — requiere supervision</td></tr>
+<tr><td><strong>Paralelismo</strong></td><td>Multiples sesiones (Managed Devins)</td><td>Una tarea a la vez</td></tr>
+<tr><td><strong>CI/CD</strong></td><td>Auto-Fix, Devin Review, CI iteration</td><td>No integrado nativamente</td></tr>
+<tr><td><strong>Code Review</strong></td><td>Devin Review + Bug Catcher</td><td>No nativo</td></tr>
+<tr><td><strong>Automatizacion</strong></td><td>Sesiones programadas, Slack triggers</td><td>Manual</td></tr>
+<tr><td><strong>Integraciones</strong></td><td>MCP Marketplace (100+ herramientas)</td><td>Extensiones VS Code</td></tr>
+<tr><td><strong>Memoria</strong></td><td>Knowledge + Playbooks (organizacional)</td><td>Flows (personal, persistente)</td></tr>
+<tr><td><strong>Navegador</strong></td><td>Completo (puede testear UIs)</td><td>No</td></tr>
+<tr><td><strong>Autocompletado</strong></td><td>Basico (en IDE integrado)</td><td>Supercomplete (avanzado)</td></tr>
+<tr><td><strong>Precio</strong></td><td>Enterprise (por organizacion)</td><td>Free + $15/mes Pro</td></tr>
+</tbody>
+</table>
+<h3>Cuando Usar Cada Herramienta</h3>
+<div class="two-cols">
+<div class="card" style="border-left: 4px solid var(--devin-primary);">
+<h4 style="color: var(--devin-primary);">🤖 Usa Devin cuando...</h4>
+<ul>
+<li>Puedes <strong>delegar completamente</strong> la tarea</li>
+<li>Necesitas <strong>automatizacion recurrente</strong></li>
+<li>Quieres <strong>paralelizar</strong> trabajo</li>
+<li>Necesitas <strong>code review automatico</strong></li>
+<li>Haces <strong>migraciones a escala</strong></li>
+<li>Necesitas <strong>respuesta a incidentes</strong></li>
+<li>No estas en tu IDE (via Slack, web)</li>
+</ul>
+</div>
+<div class="card" style="border-left: 4px solid var(--wind-primary);">
+<h4 style="color: var(--wind-primary);">🌬 Usa Windsurf cuando...</h4>
+<ul>
+<li>Haces <strong>desarrollo interactivo diario</strong></li>
+<li>Necesitas <strong>autocompletado en tiempo real</strong></li>
+<li>Quieres <strong>ediciones rapidas</strong> con Cmd+I</li>
+<li>Exploras <strong>codebase nuevo</strong></li>
+<li>Haces <strong>refactoring guiado</strong></li>
+<li>Necesitas <strong>debugging interactivo</strong></li>
+<li>Quieres <strong>control total</strong> sobre el codigo</li>
+</ul>
+</div>
+</div>
+<h3>Flujo Combinado Recomendado</h3>
+<div style="display:grid; grid-template-columns: auto 1fr; gap: 0; margin: 20px 0;">
+<div style="background:var(--wind-bg); padding:16px 20px; border-radius: var(--radius-sm) 0 0 0; border-bottom: 1px solid var(--border);">
+<strong style="color:var(--wind-primary);">1. PLANIFICACION</strong><br/>
+<span class="pill pill-wind">Windsurf</span>
+</div>
+<div style="background:var(--wind-bg); padding:16px 20px; border-radius: 0 var(--radius-sm) 0 0; border-bottom: 1px solid var(--border);">
+      Chat para explorar codebase, planificar arquitectura
+    </div>
+<div style="background:var(--wind-bg); padding:16px 20px; border-bottom: 1px solid var(--border);">
+<strong style="color:var(--wind-primary);">2. IMPLEMENTACION</strong><br/>
+<span class="pill pill-wind">Windsurf</span>
+</div>
+<div style="background:var(--wind-bg); padding:16px 20px; border-bottom: 1px solid var(--border);">
+      Supercomplete + Cascade + Inline Edit + debugging interactivo
+    </div>
+<div style="background:var(--devin-bg); padding:16px 20px; border-bottom: 1px solid var(--border);">
+<strong style="color:var(--devin-primary);">3. DELEGACION</strong><br/>
+<span class="pill pill-devin">Devin</span>
+</div>
+<div style="background:var(--devin-bg); padding:16px 20px; border-bottom: 1px solid var(--border);">
+      Genera tests, corrige vulnerabilidades, migraciones a escala, documentacion
+    </div>
+<div style="background:var(--devin-bg); padding:16px 20px; border-bottom: 1px solid var(--border);">
+<strong style="color:var(--devin-primary);">4. REVISION</strong><br/>
+<span class="pill pill-devin">Devin</span>
+</div>
+<div style="background:var(--devin-bg); padding:16px 20px; border-bottom: 1px solid var(--border);">
+      Devin Review + Bug Catcher + Auto-Fix + CI iteration
+    </div>
+<div style="background:var(--devin-bg); padding:16px 20px; border-radius: 0 0 0 var(--radius-sm);">
+<strong style="color:var(--devin-primary);">5. AUTOMATIZACION</strong><br/>
+<span class="pill pill-devin">Devin</span>
+</div>
+<div style="background:var(--devin-bg); padding:16px 20px; border-radius: 0 0 var(--radius-sm) 0;">
+      Sesiones programadas, triage de errores, actualizacion de dependencias
+    </div>
+</div>
+<div class="callout callout-tip">
+<span class="callout-icon">💡</span>
+<div><strong>Recomendacion:</strong> Windsurf y Devin son <strong>complementarios</strong>. Usa Windsurf para desarrollo interactivo diario y Devin para delegar tareas completas autonomamente. Juntos maximizan la productividad del equipo.</div>
+</div>
+</div>
+<!-- ==================== FOOTER ==================== -->
+
+<div class="section" id="sec-h">
+<h2><span class="sec-icon devin">H</span> Recursos y Formación Complementaria</h2>
+<p class="section-desc">Videos formativos organizados por nivel para acelerar la adopción de Devin en el equipo.</p>
+<h3>🎓 Nivel Principiante</h3>
+<div class="cards">
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=j3Ga7TvOqQM"target="_blank">What is Devin?</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=TqPNoAzPa2k"target="_blank">Getting started with Devin</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=8A3Qruk_6Dg"target="_blank">Building Devin's Knowledge</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=qUPRTLvhckc"target="_blank">Scaling Up Devin</a></h4></div>
+</div>
+<h3>🚀 Nivel Intermedio</h3>
+<div class="cards">
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=CAv3U5he6_Q"target="_blank">Devin UX</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=r8tU1yTEhsg"target="_blank">How to Use the Prompt Suggestion Tool</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=Yqvll_Mlcl0"target="_blank">General Prompt Guidance</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=ROvMisYY4ug"target="_blank">Effective vs Ineffective Devin Usage</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=r5QkEO0WxJA"target="_blank">Devin Workspace</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=EztTV04qV9k"target="_blank">Setting Up Repositories with Devin</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=6I_r09zamwc"target="_blank">Deep Wiki - Ask Devin</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=mLOrdoc4w74"target="_blank">Use Deep Wiki Flow Diagrams</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=CCtZR3mGVMU"target="_blank">Steering DeepWiki</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=ykJusoY_UmI"target="_blank">Use Ask Devin - Key Package Dependencies</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=0omSAgfWT4s"target="_blank">Use Ask Devin - Multirepo Dependency Differences</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=dxsvLo5Gm6I"target="_blank">Managing Secrets with Devin</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=85SWyKcm6U8"target="_blank">Understanding Devin Knowledge</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=Zek4KDDjv_o"target="_blank">Use Playbooks</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=tcvFnVP173Y"target="_blank">Generating Playbooks from Pull Requests</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=lV_Ph_KXLGo"target="_blank">Using Devin with Azure DevOps</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=3McBVs0R2GM"target="_blank">Using Devin with GitHub</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=1Em9yimr4_0"target="_blank">Using Devin with GitLab</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=wa67dlYoNS0"target="_blank">Using Devin with Jira</a></h4></div>
+<div class="card"><h4>🎥 <a href=https://www.youtube.com/watch?v=VOTLirkOrwE""target="_blank">Using Devin with Slack</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=0vp1Rhw3fO0"target="_blank">Using Devin with Linear</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=LiVi3UWckQg"target="_blank">Building Devin's Knowledge</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=54p_CPjixVY"target="_blank">Session Insights</a></h4></div>
+<div class="card"><h4>🎥 <a href="https://www.youtube.com/watch?v=S93J_NMORIs"target="_blank">Managing Devin Sessions</a></h4></div>
+
+</div>
+</div>
+<div class="footer">
+<p>
+<strong>Fuentes:</strong><br/>
+<a href="https://docs.devin.ai">docs.devin.ai</a> • <a href="https://windsurf.com">windsurf.com</a> • <a href="https://docs.windsurf.com">docs.windsurf.com</a>
+</p>
+<p style="margin-top: 12px;">
+<em>Nota: La informacion de Windsurf esta basada en informacion publica disponible. Para precios y features actualizados, consulta la documentacion oficial de cada herramienta.</em>
+</p>
+</div>
+</body>
+</html>
